@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyDigest — Your AI-Powered News Summary</title>
+    <meta name="description" content="Get AI-generated daily summaries from the world's top news sources and YouTube channels.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ─── Header ─── -->
+    <header class="app-header">
+        <div class="header-left">
+            <div class="logo">
+                <span class="logo-icon">📰</span>
+                <h1>DailyDigest</h1>
+            </div>
+            <span class="header-date" id="headerDate"></span>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-ghost" id="sourcesBtn" title="Manage Sources">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <span>Sources</span>
+            </button>
+            <button class="btn btn-ghost" id="settingsBtn" title="Settings">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
+            <button class="btn btn-primary" id="refreshBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                <span>Refresh</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ─── Progress Bar ─── -->
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="progress-text">
+            <span id="progressText">Loading...</span>
+            <span id="progressDetail" class="progress-detail"></span>
+        </div>
+    </div>
+
+    <!-- ─── Main Content ─── -->
+    <main class="main-content" id="mainContent">
+        <!-- Welcome State -->
+        <div class="welcome-card" id="welcomeCard">
+            <div class="welcome-icon">🌍</div>
+            <h2>Welcome to DailyDigest</h2>
+            <p>Get AI-powered summaries from the world's top news sources.</p>
+            <div class="welcome-steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <span>Click <strong>⚙ Settings</strong> to enter your Gemini API key</span>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <span>Click <strong>☰ Sources</strong> to add or manage your news sources</span>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <span>Click <strong>↻ Refresh</strong> to get your daily digest</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Headlines Banner -->
+        <div class="headlines-banner" id="headlinesBanner" style="display:none;">
+            <div class="headlines-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <h2>Top Headlines</h2>
+            </div>
+            <div class="headlines-content" id="headlinesContent"></div>
+        </div>
+
+        <!-- Digest Grid -->
+        <div class="digest-grid" id="digestGrid"></div>
+    </main>
+
+    <!-- ─── Sources Drawer ─── -->
+    <div class="drawer-overlay" id="sourcesOverlay"></div>
+    <div class="drawer" id="sourcesDrawer">
+        <div class="drawer-header">
+            <h2>📋 Manage Sources</h2>
+            <button class="btn btn-icon" id="sourcesClose">&times;</button>
+        </div>
+        <div class="drawer-body">
+            <div class="add-source-form">
+                <h3>Add New Source</h3>
+                <input type="text" id="newSourceUrl" placeholder="Paste a website URL or YouTube channel URL..." class="input-field">
+                <input type="text" id="newSourceName" placeholder="Source name (optional — auto-detected)" class="input-field">
+                <button class="btn btn-primary btn-full" id="addSourceBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Add Source
+                </button>
+            </div>
+            <div class="sources-list" id="sourcesList"></div>
+        </div>
+    </div>
+
+    <!-- ─── Settings Drawer ─── -->
+    <div class="drawer-overlay" id="settingsOverlay"></div>
+    <div class="drawer settings-drawer" id="settingsDrawer">
+        <div class="drawer-header">
+            <h2>⚙️ Settings</h2>
+            <button class="btn btn-icon" id="settingsClose">&times;</button>
+        </div>
+        <div class="drawer-body">
+            <div class="setting-group">
+                <label for="geminiKey">Gemini API Key</label>
+                <p class="setting-hint">Get a free key at <a href="https://aistudio.google.com/" target="_blank">aistudio.google.com</a></p>
+                <input type="password" id="geminiKey" placeholder="Enter your Gemini API key..." class="input-field">
+                <button class="btn btn-secondary btn-full" id="saveSettingsBtn">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── Toast ─── -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

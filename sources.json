@@ -1,0 +1,86 @@
+[
+  {
+    "id": "bbc",
+    "name": "BBC News",
+    "url": "https://www.bbc.com/news",
+    "type": "website",
+    "rss_url": "https://feeds.bbci.co.uk/news/rss.xml"
+  },
+  {
+    "id": "cnn",
+    "name": "CNN",
+    "url": "https://www.cnn.com",
+    "type": "website",
+    "rss_url": "http://rss.cnn.com/rss/edition.rss"
+  },
+  {
+    "id": "reuters",
+    "name": "Reuters",
+    "url": "https://www.reuters.com",
+    "type": "website",
+    "rss_url": "https://news.google.com/rss/search?q=source:Reuters+when:1d&hl=en-US&gl=US&ceid=US:en"
+  },
+  {
+    "id": "aljazeera",
+    "name": "Al Jazeera",
+    "url": "https://www.aljazeera.com",
+    "type": "website",
+    "rss_url": "https://www.aljazeera.com/xml/rss/all.xml"
+  },
+  {
+    "id": "guardian",
+    "name": "The Guardian",
+    "url": "https://www.theguardian.com",
+    "type": "website",
+    "rss_url": "https://www.theguardian.com/world/rss"
+  },
+  {
+    "id": "nyt",
+    "name": "The New York Times",
+    "url": "https://www.nytimes.com",
+    "type": "website",
+    "rss_url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+  },
+  {
+    "id": "wapo",
+    "name": "The Washington Post",
+    "url": "https://www.washingtonpost.com",
+    "type": "website",
+    "rss_url": "https://feeds.washingtonpost.com/rss/world"
+  },
+  {
+    "id": "apnews",
+    "name": "AP News",
+    "url": "https://apnews.com",
+    "type": "website",
+    "rss_url": "https://news.google.com/rss/search?q=source:AP+when:1d&hl=en-US&gl=US&ceid=US:en"
+  },
+  {
+    "id": "bloomberg",
+    "name": "Bloomberg",
+    "url": "https://www.bloomberg.com",
+    "type": "website",
+    "rss_url": "https://feeds.bloomberg.com/markets/news.rss"
+  },
+  {
+    "id": "npr",
+    "name": "NPR",
+    "url": "https://www.npr.org",
+    "type": "website",
+    "rss_url": "https://feeds.npr.org/1001/rss.xml"
+  },
+  {
+    "id": "indianexpress",
+    "name": "Indian Express",
+    "url": "https://indianexpress.com",
+    "type": "website",
+    "rss_url": "https://indianexpress.com/feed/"
+  },
+  {
+    "id": "thehindu",
+    "name": "The Hindu",
+    "url": "https://www.thehindu.com",
+    "type": "website",
+    "rss_url": "https://www.thehindu.com/feeder/default.rss"
+  }
+]
